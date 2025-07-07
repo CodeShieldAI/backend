@@ -301,7 +301,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ```bash
 # Clone repository
-git clone <repository-url>
+git clone https://github.com/CodeShieldAI/backend
 cd github-protection-agent
 
 # Install development dependencies
@@ -322,19 +322,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - [Filecoin](https://filecoin.io/) for decentralized storage infrastructure
-- [OpenAI](https://openai.com/) for AI/ML capabilities
-- [Pinata](https://pinata.cloud/) for IPFS pinning services
-- [LangChain](https://langchain.com/) for AI agent framework
-
-## 📞 Support
-
-- **Documentation**: [Wiki](../../wiki)
-- **Issues**: [GitHub Issues](../../issues)
-- **Discussions**: [GitHub Discussions](../../discussions)
-- **Email**: support@kreonlabs.com
 
 ---
-
-**⚠️ Important**: This software is for educational and research purposes. Always comply with applicable laws and platform terms of service when using IP protection tools.
-
-**🔒 Security Notice**: Keep your private keys secure and never commit them to version control. Use environment variables and secure key management practices.
