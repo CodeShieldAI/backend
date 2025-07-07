@@ -2,31 +2,31 @@
 
 A revolutionary intellectual property protection system that combines AI-powered repository analysis with Filecoin blockchain technology to provide immutable, decentralized protection for your GitHub repositories.
 
-## 🌟 New Blockchain Features
+# 🌟 New Blockchain Features
 
-### ⛓️ **Filecoin Integration**
+## ⛓️ **Filecoin Integration**
 - Smart contract repository registration on Filecoin Calibration testnet
 - Immutable proof of ownership and creation dates
 - Decentralized evidence storage via IPFS
 
-### 📄 **Automated DMCA System**
+## 📄 **Automated DMCA System**
 - AI-powered infringement detection
 - Automatic DMCA notice generation with legal templates
 - Blockchain-backed evidence storage
 - PDF generation with C2PA metadata support
 
-### 💰 **Bounty System**
+## 💰 **Bounty System**
 - Earn rewards for reporting infringements
 - Community-driven IP protection network
 - Automated verification and payment system
 
-### 🔒 **Enhanced Security**
+## 🔒 **Enhanced Security**
 - Cryptographic repository fingerprinting
 - Extensive commit history analysis
 - Secret detection across entire project history
 - Blockchain evidence preservation
 
-## 🏗️ Architecture
+# 🏗️ Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -38,7 +38,7 @@ A revolutionary intellectual property protection system that combines AI-powered
                        └──────────────────┘    └─────────────────┘
 ```
 
-## 📋 Smart Contracts
+# 📋 Smart Contracts
 
 | Contract | Address | Purpose |
 |----------|---------|---------|
@@ -48,109 +48,188 @@ A revolutionary intellectual property protection system that combines AI-powered
 | `InfringementBounty` | `0xA2cD4CC41b8DCE00D002Aa4B29050f2d53705400` | Bounty system for community reporting |
 | `DealClient` | `0x592eC554ec3Af631d76981a680f699F9618B5687` | Filecoin storage deal management |
 
-## 🚀 Quick Start
+# 🚀 Getting Started
 
-### 1. Installation
+Follow these steps to set up and run the CodeShield AI GitHub Protection Agent locally.
+
+---
+
+## 1. Clone the Repository
+
+First, clone the project from GitHub and navigate into the newly created directory.
 
 ```bash
-git clone <repository-url>
-cd github-protection-agent
+git clone [https://github.com/CodeShieldAI/backend.git](https://github.com/CodeShieldAI/backend.git)
+cd backend
+```
+
+---
+
+## 2. Set Up Environment Variables
+
+The agent requires API keys and a wallet private key to function. These are managed through a `.env` file in the project's root directory.
+
+1.  **Create the `.env` file** by copying the example template:
+    ```bash
+    cp .env.example .env
+    ```
+
+2.  **Edit the `.env` file** with your favorite editor (e.g., `nano .env` or `code .env`) and add your credentials.
+
+    ```ini
+    # REQUIRED: Your Filecoin wallet private key for transactions.
+    # This wallet must be funded with tFIL tokens. See step 3.
+    PRIVATE_KEY="0xyour_filecoin_wallet_private_key"
+
+    # REQUIRED: Your OpenAI API Key for AI-powered analysis.
+    # Get one from [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+    OPENAI_API_KEY="sk-your_openai_api_key"
+
+    # RECOMMENDED: Your GitHub API token for higher API rate limits.
+    # Generate one at [https://github.com/settings/tokens](https://github.com/settings/tokens) (with 'repo' scope).
+    GITHUB_TOKEN="ghp_your_github_token"
+
+    # OPTIONAL: Credentials for a dedicated IPFS pinning service like Pinata.
+    # Get these from [https://www.pinata.cloud/](https://www.pinata.cloud/)
+    PINATA_API_KEY="your_pinata_api_key"
+    PINATA_API_SECRET="your_pinata_api_secret"
+    ```
+
+---
+
+## 3. Get Testnet Tokens
+
+To pay for transactions on the Filecoin network (like registering a repository), your wallet needs testnet tokens (`tFIL`).
+
+Visit the **[Filecoin Calibration Faucet](https://faucet.calibration.fildev.network/)** to get free `tFIL` tokens sent to the wallet address associated with your `PRIVATE_KEY`.
+
+---
+
+## 4. Install Backend Dependencies
+
+The backend is built with Python. Install the required packages using `pip`.
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Environment Setup
+---
 
-Copy the example configuration:
-```bash
-cp .env.example .env
-```
+## 5. Validate Your Setup
 
-Configure your environment variables:
-```bash
-# Required: Filecoin wallet private key
-PRIVATE_KEY=your_private_key_here
-
-# Required: IPFS storage (Pinata recommended)
-PINATA_API_KEY=your_pinata_key
-PINATA_API_SECRET=your_pinata_secret
-
-# Required: AI model (OpenAI or local)
-OPENAI_API_KEY=your_openai_key
-# OR
-USE_LOCAL_MODEL=true
-
-# Optional: GitHub integration
-GITHUB_TOKEN=your_github_token
-```
-
-### 3. Get Testnet Tokens
-
-Visit the [Filecoin Calibration Faucet](https://faucet.calibration.fildev.network/) to get free tFIL tokens for testing.
-
-### 4. Run the Agent
+Before running the agent, use the built-in validator to ensure your environment is configured correctly. This script checks everything from API keys and network connectivity to your wallet balance.
 
 ```bash
-python -m github_protection_agent.main_blockchain
+python github_protection_agent/setup_validator.py
 ```
 
-## 🎯 Core Commands
+If all checks pass, you are ready to proceed. The validator will provide clear instructions for fixing any issues it finds.
 
-### 🔗 Blockchain Operations
+---
+
+## 6. Run the Backend Agent
+
+You can run the backend as an interactive shell or by passing commands directly via the command line.
+
+### Option A: Interactive Mode
+
+This mode starts an interactive shell where you can run commands one by one.
+
+1.  **Start the agent from the root directory**:
+    ```bash
+    python github_protection_agent/main.py
+    ```
+2.  Once initialized, you will see a welcome banner and a command prompt `🛡️ FilecoinAgent>`.
+3.  Type `help` to see a full list of commands.
+
+### Option B: Command-Line Interface (CLI)
+
+You can also execute commands directly. The script `run_agent.py` is a convenient wrapper for this.
+
+**Usage:**
 
 ```bash
-# Check blockchain status and account balance
-blockchain-status
-
-# Register repository on Filecoin with immutable proof
-register-blockchain https://github.com/user/repo MIT
-
-# Run complete protection workflow
-workflow-blockchain https://github.com/user/repo
-
-# Query registered repositories from blockchain
-query-repos 1 10
+python run_agent.py <command> [arguments...]
 ```
 
-### 🔍 Analysis & Detection
+**Example:**
 
 ```bash
-# Compare repositories with blockchain verification
-analyze https://github.com/user/repo1 https://github.com/user/repo2
+# Register a repository from the command line
+python run_agent.py register [https://github.com/your-username/your-repo](https://github.com/your-username/your-repo) MIT
 
-# Security audit with blockchain evidence storage
-audit https://github.com/user/repo --extensive
-
-# Scan for violations with automatic DMCA filing
-scan 1
+# Run a security audit
+python run_agent.py audit [https://github.com/your-username/your-repo](https://github.com/your-username/your-repo)
 ```
 
-### 💰 Bounty System
+### Available Commands
 
-```bash
-# Report infringement and earn bounty
-report-bounty https://github.com/bad/repo QmLicense123 QmDMCA456
-```
+Here is a list of the primary commands available in both modes:
 
-## 🔧 Advanced Features
+#### 🔧 SYSTEM COMMANDS:
 
-### Submission Types
+* **validate**
+    * Run complete system validation (blockchain, IPFS, AI).
+    * *Example: `validate`*
+* **status**
+    * Check blockchain connection, account balance, and IPFS services.
+    * *Example: `status`*
 
-The system supports three types of blockchain submissions:
+#### 🔗 BLOCKCHAIN COMMANDS:
 
-1. **Register** (`SubmissionType.Register = 0`)
-   - Register new repository with license
-   - Generate and store license PDF on IPFS
-   - Create immutable ownership record
+* **register `<url>` `[license_type]`**
+    * Register a repository on Filecoin with license generation.
+    * License types: MIT, Apache-2.0, GPL-3.0, BSD-3-Clause, Custom-AI.
+    * *Example: `register https://github.com/user/repo MIT`*
+* **query `[start_id]` `[limit]`**
+    * Query repositories from the blockchain.
+    * *Example: `query 1 10`*
+* **workflow `<url>`**
+    * Run the complete protection workflow (register + audit + scan).
+    * *Example: `workflow https://github.com/user/repo`*
 
-2. **ReportViolation** (`SubmissionType.ReportViolation = 1`)
-   - Report copyright infringement
-   - Generate DMCA notice automatically
-   - Store evidence on blockchain
+#### 🔍 ANALYSIS COMMANDS:
 
-3. **UpdateLicense** (`SubmissionType.UpdateLicense = 2`)
-   - Update repository license
-   - Maintain license history
-   - Ensure compliance tracking
+* **analyze `<url1>` `<url2>`**
+    * Compare two repositories for similarity.
+    * *Example: `analyze github.com/user1/repo1 github.com/user2/repo2`*
+* **audit `<url>` `[--extensive]`**
+    * Run a security audit with blockchain evidence storage.
+    * *Example: `audit github.com/user/repo --extensive`*
+* **scan `[repo_id]`**
+    * Scan for violations and file DMCA notices.
+    * *Example: `scan 1`*
+
+#### 💰 BOUNTY COMMANDS:
+
+* **bounty `<infringing_url>` `[original_repo_id]`**
+    * Report an infringement to earn bounty rewards.
+    * *Example: `bounty github.com/bad/repo 1`*
+
+#### ℹ️ UTILITY COMMANDS:
+
+* **help** - Show the complete command reference.
+* **quit/exit** - Exit the interactive agent.
+
+---
+
+## 7. Install and Run the Frontend
+
+The frontend provides a user-friendly web interface for the agent.
+
+1.  **Navigate into the frontend directory**:
+    ```bash
+    cd frontend
+    ```
+2.  **Install the necessary NPM packages**:
+    ```bash
+    npm install
+    ```
+3.  **Start the frontend development server**:
+    ```bash
+    npm run dev
+    ```
+4.  Open your web browser and go to **`http://localhost:3000`** (or the URL shown in your terminal) to access the application.
 
 ### IPFS Integration
 
@@ -181,9 +260,9 @@ All documents are stored on IPFS for decentralized access:
 
 ### Bounty Rewards
 
-- **Valid Infringement Report**: 1.0 tFIL
-- **DMCA Takedown Success**: 2.0 tFIL
-- **Community Verification**: 0.5 tFIL
+- **Valid Infringement Report**
+- **DMCA Takedown Success**
+- **Community Verification**
 
 ## 🔐 Security Features
 
@@ -222,102 +301,6 @@ https://api.calibration.node.glif.io/rpc/v1
 https://filecoin-calibration.chainup.net/rpc/v1
 ```
 
-## 📊 Usage Examples
-
-### Complete Protection Workflow
-
-```python
-from github_protection_agent import BlockchainEnhancedGitHubProtectionAgent
-
-# Initialize agent with blockchain support
-config = {
-    'PRIVATE_KEY': 'your_private_key',
-    'PINATA_API_KEY': 'your_pinata_key',
-    'PINATA_API_SECRET': 'your_pinata_secret',
-    'OPENAI_API_KEY': 'your_openai_key'
-}
-
-agent = BlockchainEnhancedGitHubProtectionAgent(config)
-
-# Run complete protection workflow
-result = agent.run_protection_workflow_blockchain('https://github.com/user/repo')
-
-print(f"Repository registered with ID: {result['summary']['repo_id']}")
-print(f"Blockchain transactions: {result['summary']['total_blockchain_transactions']}")
-print(f"DMCA notices filed: {result['summary']['dmca_notices_filed']}")
-```
-
-### Query Blockchain Data
-
-```python
-# Get repository from blockchain
-repo_data = agent.contract_interface.get_repository_from_chain(1)
-print(f"Repository: {repo_data['repository']['github_url']}")
-print(f"Owner: {repo_data['repository']['owner']}")
-print(f"License: {repo_data['repository']['license_type']}")
-
-# Check account balance
-balance = agent.contract_interface.get_account_balance()
-print(f"Account balance: {balance:.6f} tFIL")
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **"Failed to connect to Filecoin network"**
-   - Check your RPC URL and internet connection
-   - Try alternative RPC endpoints
-   - Verify network isn't under maintenance
-
-2. **"Insufficient funds for gas"**
-   - Get more tFIL from the faucet
-   - Check account balance with `blockchain-status`
-   - Wait for faucet cooldown period
-
-3. **"IPFS upload failed"**
-   - Verify Pinata API credentials
-   - Check IPFS service status
-   - Try alternative IPFS providers
-
-4. **"Contract call failed"**
-   - Check contract addresses are correct
-   - Verify ABI matches deployed contract
-   - Ensure account has permissions
-
-### Debug Mode
-
-Enable detailed logging:
-```bash
-export LOG_LEVEL=DEBUG
-export DEVELOPMENT_MODE=true
-```
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
-
-```bash
-# Clone repository
-git clone https://github.com/CodeShieldAI/backend
-cd github-protection-agent
-
-# Install development dependencies
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
-
-# Set up pre-commit hooks
-pre-commit install
-
-# Run tests
-pytest tests/
-```
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
