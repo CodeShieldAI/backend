@@ -77,8 +77,8 @@ class DMCAGenerator:
             
             # Date and From
             story.append(Paragraph(f"Date: {datetime.now().strftime('%B %d, %Y')}", body_style))
-            story.append(Paragraph("From: Kreon Labs IP Protection Unit", body_style))
-            story.append(Paragraph("Email: legal@kreonlabs.com", body_style))
+            story.append(Paragraph("From: DataShield Protection Unit", body_style))
+            story.append(Paragraph("Email: xxx@xxx.com", body_style))
             story.append(Spacer(1, 20))
             
             # To Section
@@ -195,7 +195,7 @@ class DMCAGenerator:
             story.append(Paragraph("Sincerely,", body_style))
             story.append(Spacer(1, 30))
             story.append(Paragraph("_______________________", body_style))
-            story.append(Paragraph("Kreon Labs IP Protection Unit", body_style))
+            story.append(Paragraph("DataShield Protection Unit", body_style))
             story.append(Paragraph("Authorized Agent", body_style))
             story.append(Paragraph(f"Date: {datetime.now().strftime('%B %d, %Y')}", body_style))
             

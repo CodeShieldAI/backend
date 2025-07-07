@@ -474,7 +474,7 @@ class ExampleUsageDemo:
         print("\n🔗 Resources:")
         print("   • Filecoin Faucet: https://faucet.calibration.fildev.network/")
         print("   • Agent Documentation: README.md")
-        print("   • Support: legal@kreonlabs.com")
+        print("   • Support: legal@DataShield.com")
 
 
 def main():

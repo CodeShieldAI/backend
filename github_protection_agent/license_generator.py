@@ -109,7 +109,7 @@ class LicenseGenerator:
             story.append(Paragraph("BLOCKCHAIN PROTECTION NOTICE", heading_style))
             
             protection_text = f"""This repository and its contents are protected by blockchain technology 
-            and registered with Kreon Labs IP Protection System. Any unauthorized use, reproduction, or 
+            and registered with DataShield IP Protection System. Any unauthorized use, reproduction, or 
             distribution may result in legal action including DMCA takedown notices.
             
             Repository Hash: {repo_data.get('sha', 'N/A')}
@@ -117,7 +117,7 @@ class LicenseGenerator:
             Protection Level: Enhanced with C2PA metadata
             
             For licensing inquiries, please contact the repository owner through GitHub or 
-            legal@kreonlabs.com for assistance with compliance verification."""
+            legal@DataShield.com for assistance with compliance verification."""
             
             story.append(Paragraph(protection_text, body_style))
             
@@ -254,4 +254,4 @@ with proprietary software, the resulting work must be licensed under the AGPL.""
 5. WARRANTY DISCLAIMER:
    This software is provided "as is" without warranty of any kind.
 
-For commercial licensing or AI training permissions, contact: legal@kreonlabs.com"""
+For commercial licensing or AI training permissions, contact: legal@DataShield.com"""
