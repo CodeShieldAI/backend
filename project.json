@@ -1,0 +1,23 @@
+{
+  "name": "GitHub Repository Protection Agent",
+  "tagline": "AI-powered repository protection with blockchain-based ownership verification and automated DMCA generation.",
+  "description": "An advanced AI agent built with LangChain and LlamaIndex that integrates deeply with a Filecoin EVM environment to provide immutable IP protection for developers. The agent automates security audits, registers code ownership on-chain, monitors for copyright infringement, and automatically generates professionally formatted DMCA takedown notices to protect developers' work.",
+  "team": [
+    {
+      "name": "Lia & PP",
+      "email": "lalith.aak.970@gmail.com"
+    }
+  ],
+  "demo_url": "https://brilliant-chebakia-eaa8b9.netlify.app/",
+  "video_url": "https://drive.google.com/drive/folders/1Ho8Do8rXIm8G45ys-0qwtUB0Heu_EMg-?usp=drive_link",
+  "repository_url": "https://github.com/CodeShieldAI/backend",
+  "technologies": [
+    "Filecoin EVM",
+    "Solidity",
+    "LangChain",
+    "LlamaIndex",
+    "Python",
+    "FastAPI",
+    "React"
+  ]
+}
