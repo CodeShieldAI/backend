@@ -8,9 +8,10 @@ import hashlib
 import json
 from typing import Dict, List
 from datetime import datetime
-from github_protection_agent.utils import setup_logging
 from dotenv import load_dotenv
 load_dotenv()
+
+from .utils import setup_logging
 
 logger = setup_logging(__name__)
 

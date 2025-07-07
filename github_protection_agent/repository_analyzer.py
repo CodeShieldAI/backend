@@ -6,7 +6,7 @@ import hashlib
 import json
 import requests
 from typing import Dict, List
-from .utils import setup_logging
+from github_protection_agent.utils import setup_logging
 from dotenv import load_dotenv
 load_dotenv()
 

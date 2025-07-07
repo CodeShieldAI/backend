@@ -5,7 +5,8 @@ Handles community-driven infringement reporting with rewards
 import asyncio
 from typing import Dict, List, Optional
 from datetime import datetime
-from github_protection_agent.utils import setup_logging
+
+from .utils import setup_logging
 
 logger = setup_logging(__name__)
 

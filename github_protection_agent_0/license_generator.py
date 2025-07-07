@@ -5,23 +5,18 @@ Generates license PDFs for registered repositories
 import os
 from datetime import datetime
 from typing import Dict
-from github_protection_agent.utils import setup_logging
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.lib.colors import black, blue
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
 from dotenv import load_dotenv
 load_dotenv()
 
-logger = setup_logging(__name__)
+from .utils import setup_logging
 
-try:
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
-    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-    from reportlab.lib.units import inch
-    from reportlab.lib.colors import black, blue
-    from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
-    PDF_AVAILABLE = True
-except ImportError:
-    PDF_AVAILABLE = False
-    logger.warning("⚠️ ReportLab not installed. PDF generation will be disabled.")
+logger = setup_logging(__name__)
 
 
 class LicenseGenerator:
@@ -39,11 +34,6 @@ class LicenseGenerator:
     
     def generate_license_pdf(self, github_url: str, license_type: str, repo_data: Dict) -> str:
         """Generate license PDF for repository"""
-        
-        if not PDF_AVAILABLE:
-            logger.warning("⚠️ PDF generation not available (ReportLab not installed)")
-            return None
-        
         try:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             filename = f"license_{license_type}_{timestamp}.pdf"

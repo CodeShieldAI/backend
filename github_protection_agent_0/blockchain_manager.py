@@ -230,7 +230,7 @@ class BlockchainManager:
             
             # Sign and send transaction
             signed_tx = self.account.sign_transaction(tx)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
             
             # Wait for confirmation
             receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
@@ -282,7 +282,7 @@ class BlockchainManager:
                 })
             
             signed_tx = self.account.sign_transaction(tx)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
             receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
             
             logger.info(f"✅ Link registered: {tx_hash.hex()}")
@@ -330,7 +330,7 @@ class BlockchainManager:
                 })
             
             signed_tx = self.account.sign_transaction(tx)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
             receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
             
             logger.info(f"✅ DMCA filed: {tx_hash.hex()}")
@@ -364,7 +364,7 @@ class BlockchainManager:
             })
             
             signed_tx = self.account.sign_transaction(tx)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
             receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
             
             logger.info(f"✅ Infringement reported for bounty: {tx_hash.hex()}")
@@ -434,7 +434,7 @@ class BlockchainManager:
             })
             
             signed_tx = self.account.sign_transaction(tx)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
             receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
             
             logger.info(f"✅ Bounty withdrawn: {Web3.from_wei(balance, 'ether')} FIL")
@@ -484,7 +484,7 @@ class BlockchainManager:
             })
             
             signed_tx = self.account.sign_transaction(tx)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_tx.raw_transaction)
             receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
             
             logger.info(f"✅ Filecoin deal created: {tx_hash.hex()}")

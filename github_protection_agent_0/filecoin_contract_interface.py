@@ -222,7 +222,7 @@ class FilecoinContractInterface:
             
             # Sign and send transaction
             signed_txn = self.w3.eth.account.sign_transaction(transaction, self.private_key)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.raw_transaction)
             
             # Wait for confirmation
             tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
@@ -284,7 +284,7 @@ class FilecoinContractInterface:
             
             # Sign and send transaction
             signed_txn = self.w3.eth.account.sign_transaction(transaction, self.private_key)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.raw_transaction)
             
             # Wait for confirmation
             tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
@@ -331,7 +331,7 @@ class FilecoinContractInterface:
             
             # Sign and send transaction
             signed_txn = self.w3.eth.account.sign_transaction(transaction, self.private_key)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.raw_transaction)
             
             # Wait for confirmation
             tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
@@ -373,7 +373,7 @@ class FilecoinContractInterface:
             
             # Sign and send transaction
             signed_txn = self.w3.eth.account.sign_transaction(transaction, self.private_key)
-            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+            tx_hash = self.w3.eth.send_raw_transaction(signed_txn.raw_transaction)
             
             # Wait for confirmation
             tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)

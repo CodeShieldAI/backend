@@ -1,330 +1,340 @@
-# GitHub Repository Protection Agent
+# 🛡️ Filecoin-Enhanced GitHub Protection Agent 
 
-**AI-powered repository protection with blockchain-based ownership verification and automated DMCA generation.**
+A revolutionary intellectual property protection system that combines AI-powered repository analysis with Filecoin blockchain technology to provide immutable, decentralized protection for your GitHub repositories.
 
-## 🚀 Overview
+## 🌟 New Blockchain Features
 
-This project creates an advanced AI agent that helps developers protect their GitHub repositories from unauthorized copying and usage. The system combines LLamaIndex for intelligent code analysis, LangChain for natural language processing, and Flow blockchain for immutable ownership records.
+### ⛓️ **Filecoin Integration**
+- Smart contract repository registration on Filecoin Calibration testnet
+- Immutable proof of ownership and creation dates
+- Decentralized evidence storage via IPFS
 
-## ✨ Key Features
+### 📄 **Automated DMCA System**
+- AI-powered infringement detection
+- Automatic DMCA notice generation with legal templates
+- Blockchain-backed evidence storage
+- PDF generation with C2PA metadata support
 
-### 🔍 **Intelligent Code Analysis**
-- **Repository Fingerprinting**: Generates unique signatures for code repositories using AI
-- **Key Feature Extraction**: Identifies distinctive algorithms, patterns, and implementations
-- **Security Auditing**: Automated security vulnerability detection and reporting
-- **License Generation**: AI-powered license creation based on usage requirements
+### 💰 **Bounty System**
+- Earn rewards for reporting infringements
+- Community-driven IP protection network
+- Automated verification and payment system
 
-### 🛡️ **Blockchain Protection**
-- **Ownership Registration**: Record repository ownership on Flow blockchain
-- **Immutable Proof**: Cryptographic evidence of code authorship and creation time
-- **Violation Tracking**: On-chain records of code theft and unauthorized usage
-- **Dispute Resolution**: Blockchain-based dispute and resolution system
-
-### 🤖 **AI-Powered Monitoring**
-- **Similarity Detection**: Advanced algorithms to find copied code across GitHub
-- **Automated Scanning**: Continuous monitoring for potential violations
-- **Evidence Collection**: Automatic gathering of proof for copyright claims
-- **DMCA Generation**: AI-generated legal takedown notices
-
-### 🔗 **Flow Blockchain Integration**
-- **EVM Compatibility**: Uses Flow's EVM for smart contract deployment
-- **Low Transaction Costs**: Efficient blockchain operations
-- **AgentKit Integration**: Seamless wallet and transaction management
-- **Native VRF**: Secure randomness for verification processes
+### 🔒 **Enhanced Security**
+- Cryptographic repository fingerprinting
+- Extensive commit history analysis
+- Secret detection across entire project history
+- Blockchain evidence preservation
 
 ## 🏗️ Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   GitHub API    │    │  LlamaIndex      │    │  Flow Blockchain │
-│   Repository    │◄──►│  Code Analysis   │◄──►│  Smart Contract  │
-│   Scanning      │    │  & Similarity    │    │  Ownership       │
+│   GitHub Repo   │────│  Analysis Agent  │────│  Filecoin Chain │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
-         │                        │                        │
-         └────────────────────────┼────────────────────────┘
-                                 │
-         ┌─────────────────────────▼─────────────────────────┐
-         │              LangChain Agent                      │
-         │           Natural Language Interface              │
-         │        ┌──────────────────────────────────┐       │
-         │        │  • Repository Registration       │       │
-         │        │  • Violation Detection           │       │
-         │        │  • Security Auditing             │       │
-         │        │  • License Generation            │       │
-         │        │  • DMCA Creation                 │       │
-         │        └──────────────────────────────────┘       │
-         └───────────────────────────────────────────────────┘
+                                │                         │
+                       ┌──────────────────┐    ┌─────────────────┐
+                       │  IPFS Storage    │────│  Smart Contracts│
+                       └──────────────────┘    └─────────────────┘
 ```
 
-## 🛠️ Technology Stack
+## 📋 Smart Contracts
 
-- **AI/ML**: LangChain, LlamaIndex, Anthropic Claude, Sentence Transformers
-- **Blockchain**: Flow EVM, Solidity, AgentKit, Viem
-- **Backend**: FastAPI, Python, PostgreSQL, Redis
-- **Frontend**: React, Next.js, TailwindCSS
-- **DevOps**: Docker, Kubernetes, GitHub Actions
+| Contract | Address | Purpose |
+|----------|---------|---------|
+| `GitHubRepoProtection` | `0x19054030669efBFc413bA3729b63eCfD3Bdc22B5` | Main repository registration and violation tracking |
+| `LinkRegistry` | `0x5fa19b4a48C20202055c8a6fdf16688633617D50` | License and DMCA document registry |
+| `LinkRegistryWithDeals` | `0x25bc04a49997e25B7482eEcbeB2Ec67740AEd5a6` | Enhanced registry with Filecoin deal support |
+| `InfringementBounty` | `0xA2cD4CC41b8DCE00D002Aa4B29050f2d53705400` | Bounty system for community reporting |
+| `DealClient` | `0x592eC554ec3Af631d76981a680f699F9618B5687` | Filecoin storage deal management |
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.11+
-- Node.js 18+
-- Docker & Docker Compose
-- Flow wallet with testnet FLOW tokens
-
-### Environment Setup
+### 1. Installation
 
 ```bash
-# Clone repository
-git clone https://github.com/your-org/github-protection-agent
+git clone <repository-url>
 cd github-protection-agent
-
-# Copy environment template
-cp .env.example .env
-
-# Edit .env with your API keys
-vim .env
-```
-
-Required environment variables:
-```env
-ANTHROPIC_API_KEY=your_anthropic_api_key
-GITHUB_TOKEN=your_github_token
-PRIVATE_KEY=your_flow_wallet_private_key
-CONTRACT_ADDRESS=deployed_contract_address
-```
-
-### Deploy Smart Contract
-
-```bash
-# Install dependencies
-npm install
-
-# Deploy to Flow testnet
-npx hardhat run scripts/deploy.js --network flow-testnet
-
-# Note the contract address for your .env file
-```
-
-### Start the Agent
-
-```bash
-# Using Docker Compose (recommended)
-docker-compose up -d
-
-# Or run locally
 pip install -r requirements.txt
-uvicorn agent_fastapi_server:app --reload
 ```
 
-The agent will be available at `http://localhost:8000`
+### 2. Environment Setup
 
-## 📖 Usage Examples
-
-### 1. Register Repository
-
-```python
-from github_protection_sdk import GitHubProtectionClient
-
-client = GitHubProtectionClient()
-
-# Register repository for protection
-result = client.register_repository(
-    github_url="https://github.com/username/my-project",
-    license_type="MIT"
-)
-
-print(f"Registration job: {result['job_id']}")
-
-# Wait for completion
-final_result = client.wait_for_job(result['job_id'])
-print(f"Repository registered with hash: {final_result['result']['repo_hash']}")
-```
-
-### 2. Security Audit
-
-```python
-# Perform comprehensive security audit
-audit_result = client.security_audit(
-    github_url="https://github.com/username/my-project"
-)
-
-# Get audit results
-audit_job = client.wait_for_job(audit_result['job_id'])
-print("Security findings:", audit_job['result']['audit_result'])
-```
-
-### 3. Natural Language Queries
-
-```python
-# Ask the agent questions
-response = client.ask_agent(
-    "What are the main security vulnerabilities in my Python Flask application?"
-)
-
-print("Agent advice:", response['response'])
-```
-
-### 4. Violation Detection
-
-```python
-# Search for potential code theft
-violations = client.search_violations(repo_id=1)
-
-# Report violations found
-for violation in violations['result']:
-    if violation['similarity'] > 0.8:
-        client.report_violation(
-            original_repo_id=1,
-            violating_url=violation['repo_url'],
-            similarity_score=violation['similarity']
-        )
-```
-
-## 🔧 API Endpoints
-
-### Core Operations
-- `POST /register-repository` - Register repository for protection
-- `POST /security-audit` - Perform security audit
-- `POST /search-violations/{repo_id}` - Search for code violations
-- `POST /report-violation` - Report code theft to blockchain
-- `POST /generate-license` - Generate appropriate license
-
-### Agent Interaction
-- `POST /agent-query` - Natural language queries
-- `POST /full-protection-workflow` - Complete protection setup
-
-### Job Management
-- `GET /job/{job_id}` - Get job status
-- `GET /jobs` - List all jobs
-- `DELETE /job/{job_id}` - Delete job
-
-### Utilities
-- `GET /contract-info` - Smart contract information
-- `GET /agent-status` - Agent health and capabilities
-
-## 🔐 Smart Contract Functions
-
-### Repository Management
-```solidity
-function registerRepository(
-    string memory githubUrl,
-    string memory repoHash,
-    string memory codeFingerprint,
-    string[] memory keyFeatures,
-    string memory licenseType,
-    string memory ipfsMetadata
-) external returns (uint256)
-```
-
-### Violation Reporting
-```solidity
-function reportViolation(
-    uint256 originalRepoId,
-    string memory violatingUrl,
-    string memory evidenceHash,
-    uint256 similarityScore
-) external returns (uint256)
-```
-
-### Status Updates
-```solidity
-function updateViolationStatus(
-    uint256 violationId,
-    ViolationStatus newStatus,
-    string memory dmcaReference
-) external
-```
-
-## 🚦 Deployment
-
-### Docker Deployment
+Copy the example configuration:
 ```bash
-# Build and deploy
-docker-compose up -d
-
-# Scale for production
-docker-compose up -d --scale agent-api=3
+cp .env.example .env
 ```
 
-### Kubernetes Deployment
+Configure your environment variables:
 ```bash
-# Apply configurations
-kubectl apply -f k8s-deployment.yaml
+# Required: Filecoin wallet private key
+PRIVATE_KEY=your_private_key_here
 
-# Check status
-kubectl get pods -l app=github-protection-agent
+# Required: IPFS storage (Pinata recommended)
+PINATA_API_KEY=your_pinata_key
+PINATA_API_SECRET=your_pinata_secret
+
+# Required: AI model (OpenAI or local)
+OPENAI_API_KEY=your_openai_key
+# OR
+USE_LOCAL_MODEL=true
+
+# Optional: GitHub integration
+GITHUB_TOKEN=your_github_token
 ```
 
-### Environment-Specific Configs
-- **Development**: Local Docker setup with hot reload
-- **Staging**: Kubernetes cluster with Flow testnet
-- **Production**: Multi-region deployment with Flow mainnet
+### 3. Get Testnet Tokens
 
-## 🔍 Monitoring & Observability
+Visit the [Filecoin Calibration Faucet](https://faucet.calibration.fildev.network/) to get free tFIL tokens for testing.
 
-### Health Checks
-- **API Health**: `GET /` endpoint
-- **Agent Status**: `GET /agent-status`
-- **Database**: PostgreSQL connection monitoring
-- **Blockchain**: Flow network connectivity
+### 4. Run the Agent
 
-### Metrics Collection
-- Request/response times
-- Job completion rates
-- Violation detection accuracy
-- Smart contract gas usage
+```bash
+python -m github_protection_agent.main_blockchain
+```
 
-### Logging
-- Structured JSON logging
-- Centralized log aggregation
-- Error tracking and alerting
+## 🎯 Core Commands
+
+### 🔗 Blockchain Operations
+
+```bash
+# Check blockchain status and account balance
+blockchain-status
+
+# Register repository on Filecoin with immutable proof
+register-blockchain https://github.com/user/repo MIT
+
+# Run complete protection workflow
+workflow-blockchain https://github.com/user/repo
+
+# Query registered repositories from blockchain
+query-repos 1 10
+```
+
+### 🔍 Analysis & Detection
+
+```bash
+# Compare repositories with blockchain verification
+analyze https://github.com/user/repo1 https://github.com/user/repo2
+
+# Security audit with blockchain evidence storage
+audit https://github.com/user/repo --extensive
+
+# Scan for violations with automatic DMCA filing
+scan 1
+```
+
+### 💰 Bounty System
+
+```bash
+# Report infringement and earn bounty
+report-bounty https://github.com/bad/repo QmLicense123 QmDMCA456
+```
+
+## 🔧 Advanced Features
+
+### Submission Types
+
+The system supports three types of blockchain submissions:
+
+1. **Register** (`SubmissionType.Register = 0`)
+   - Register new repository with license
+   - Generate and store license PDF on IPFS
+   - Create immutable ownership record
+
+2. **ReportViolation** (`SubmissionType.ReportViolation = 1`)
+   - Report copyright infringement
+   - Generate DMCA notice automatically
+   - Store evidence on blockchain
+
+3. **UpdateLicense** (`SubmissionType.UpdateLicense = 2`)
+   - Update repository license
+   - Maintain license history
+   - Ensure compliance tracking
+
+### IPFS Integration
+
+All documents are stored on IPFS for decentralized access:
+
+- **License PDFs**: Generated with legal templates
+- **DMCA Notices**: Professional takedown requests
+- **Security Reports**: Comprehensive audit results
+- **Evidence Files**: Cryptographic proof of violations
+
+### AI-Powered Analysis
+
+- **Repository Fingerprinting**: Unique cryptographic signatures
+- **Code Similarity Detection**: Advanced ML algorithms
+- **Security Scanning**: 50+ vulnerability patterns
+- **Commit History Analysis**: Full project lifecycle review
+
+## 🏦 Economic Model
+
+### Gas Costs (Estimated)
+
+| Operation | Gas | Cost (tFIL) |
+|-----------|-----|-------------|
+| Register Repository | ~200,000 | ~0.002 |
+| Report Violation | ~150,000 | ~0.0015 |
+| File DMCA | ~100,000 | ~0.001 |
+| Add Link | ~100,000 | ~0.001 |
+
+### Bounty Rewards
+
+- **Valid Infringement Report**: 1.0 tFIL
+- **DMCA Takedown Success**: 2.0 tFIL
+- **Community Verification**: 0.5 tFIL
+
+## 🔐 Security Features
+
+### Multi-Layer Protection
+
+1. **Blockchain Immutability**: Records cannot be altered
+2. **IPFS Persistence**: Documents remain accessible
+3. **Cryptographic Signatures**: Tamper-proof evidence
+4. **C2PA Metadata**: Content authenticity verification
+
+### Privacy & Compliance
+
+- **GDPR Compliant**: Right to erasure supported
+- **DMCA Compliant**: Legal framework adherence
+- **Open Source**: Transparent and auditable
+- **Decentralized**: No single point of failure
+
+## 🌐 Network Information
+
+### Filecoin Calibration Testnet
+
+- **Chain ID**: 314159 (0x4cb2f)
+- **Currency**: tFIL
+- **Block Time**: ~30 seconds
+- **Explorer**: https://calibration.filscan.io
+- **Faucet**: https://faucet.calibration.fildev.network/
+
+### RPC Endpoints
+
+```bash
+# Primary (Ankr)
+https://rpc.ankr.com/filecoin_testnet
+
+# Alternative endpoints
+https://api.calibration.node.glif.io/rpc/v1
+https://filecoin-calibration.chainup.net/rpc/v1
+```
+
+## 📊 Usage Examples
+
+### Complete Protection Workflow
+
+```python
+from github_protection_agent import BlockchainEnhancedGitHubProtectionAgent
+
+# Initialize agent with blockchain support
+config = {
+    'PRIVATE_KEY': 'your_private_key',
+    'PINATA_API_KEY': 'your_pinata_key',
+    'PINATA_API_SECRET': 'your_pinata_secret',
+    'OPENAI_API_KEY': 'your_openai_key'
+}
+
+agent = BlockchainEnhancedGitHubProtectionAgent(config)
+
+# Run complete protection workflow
+result = agent.run_protection_workflow_blockchain('https://github.com/user/repo')
+
+print(f"Repository registered with ID: {result['summary']['repo_id']}")
+print(f"Blockchain transactions: {result['summary']['total_blockchain_transactions']}")
+print(f"DMCA notices filed: {result['summary']['dmca_notices_filed']}")
+```
+
+### Query Blockchain Data
+
+```python
+# Get repository from blockchain
+repo_data = agent.contract_interface.get_repository_from_chain(1)
+print(f"Repository: {repo_data['repository']['github_url']}")
+print(f"Owner: {repo_data['repository']['owner']}")
+print(f"License: {repo_data['repository']['license_type']}")
+
+# Check account balance
+balance = agent.contract_interface.get_account_balance()
+print(f"Account balance: {balance:.6f} tFIL")
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **"Failed to connect to Filecoin network"**
+   - Check your RPC URL and internet connection
+   - Try alternative RPC endpoints
+   - Verify network isn't under maintenance
+
+2. **"Insufficient funds for gas"**
+   - Get more tFIL from the faucet
+   - Check account balance with `blockchain-status`
+   - Wait for faucet cooldown period
+
+3. **"IPFS upload failed"**
+   - Verify Pinata API credentials
+   - Check IPFS service status
+   - Try alternative IPFS providers
+
+4. **"Contract call failed"**
+   - Check contract addresses are correct
+   - Verify ABI matches deployed contract
+   - Ensure account has permissions
+
+### Debug Mode
+
+Enable detailed logging:
+```bash
+export LOG_LEVEL=DEBUG
+export DEVELOPMENT_MODE=true
+```
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ### Development Setup
+
 ```bash
+# Clone repository
+git clone <repository-url>
+cd github-protection-agent
+
 # Install development dependencies
+pip install -r requirements.txt
 pip install -r requirements-dev.txt
+
+# Set up pre-commit hooks
+pre-commit install
 
 # Run tests
 pytest tests/
-
-# Code formatting
-black github_protection_agent.py
-flake8 github_protection_agent.py
 ```
 
-## 📄 License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- **Flow Blockchain** for EVM compatibility and low-cost transactions
-- **Anthropic** for Claude AI capabilities
-- **LangChain** for agent framework
-- **LlamaIndex** for intelligent document processing
-
-## 🔗 Links
-
-- **Live Demo**: [https://github-protection.flow.com](https://github-protection.flow.com)
-- **Documentation**: [https://docs.github-protection.flow.com](https://docs.github-protection.flow.com)
-- **Flow Developer Portal**: [https://developers.flow.com](https://developers.flow.com)
-- **Contract Address**: `0x...` (Flow Testnet)
+- [Filecoin](https://filecoin.io/) for decentralized storage infrastructure
+- [OpenAI](https://openai.com/) for AI/ML capabilities
+- [Pinata](https://pinata.cloud/) for IPFS pinning services
+- [LangChain](https://langchain.com/) for AI agent framework
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/github-protection-agent/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/github-protection-agent/discussions)
-- **Discord**: [Flow Discord](https://discord.gg/flow)
+- **Documentation**: [Wiki](../../wiki)
+- **Issues**: [GitHub Issues](../../issues)
+- **Discussions**: [GitHub Discussions](../../discussions)
+- **Email**: support@kreonlabs.com
 
 ---
 
-x
+**⚠️ Important**: This software is for educational and research purposes. Always comply with applicable laws and platform terms of service when using IP protection tools.
+
+**🔒 Security Notice**: Keep your private keys secure and never commit them to version control. Use environment variables and secure key management practices.

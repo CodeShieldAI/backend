@@ -5,23 +5,18 @@ Generates DMCA takedown notices with C2PA metadata support
 import os
 from datetime import datetime
 from typing import Dict
-from github_protection_agent.utils import setup_logging
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.lib.colors import red, black, blue
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
 from dotenv import load_dotenv
 load_dotenv()
 
-logger = setup_logging(__name__)
+from .utils import setup_logging
 
-try:
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
-    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-    from reportlab.lib.units import inch
-    from reportlab.lib.colors import red, black, blue
-    from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
-    PDF_AVAILABLE = True
-except ImportError:
-    PDF_AVAILABLE = False
-    logger.warning("⚠️ ReportLab not installed. PDF generation will be disabled.")
+logger = setup_logging(__name__)
 
 
 class DMCAGenerator:
@@ -29,11 +24,6 @@ class DMCAGenerator:
     
     def generate_dmca_pdf(self, dmca_data: Dict) -> str:
         """Generate DMCA takedown notice PDF"""
-        
-        if not PDF_AVAILABLE:
-            logger.warning("⚠️ PDF generation not available (ReportLab not installed)")
-            return None
-        
         try:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             filename = f"dmca_notice_{dmca_data['original_repo']['id']}_{timestamp}.pdf"

@@ -4,7 +4,8 @@ Handles PDF report generation for security audits
 """
 from datetime import datetime
 from typing import Dict
-from github_protection_agent.utils import setup_logging
+
+from .utils import setup_logging
 from dotenv import load_dotenv
 load_dotenv()
 
