@@ -333,7 +333,7 @@ class CompleteFilecoinAgent:
                 'registration_tx': blockchain_result['tx_hash']
             })
             
-            # Step 10: Update cache
+            # Step 10: Update cache with complete data
             repo_id = blockchain_result['repo_id']
             self.repositories_cache[repo_id] = {
                 'id': repo_id,
@@ -342,6 +342,7 @@ class CompleteFilecoinAgent:
                 'fingerprint': fingerprint,
                 'license_type': license_type,
                 'license_ipfs_hash': license_ipfs_hash,
+                'tx_hash': blockchain_result['tx_hash'], # Ensure tx_hash is cached
                 'registered_at': datetime.now().isoformat(),
                 'blockchain_confirmed': True,
                 'ipfs_pinned': pin_result['success']
@@ -433,7 +434,7 @@ class CompleteFilecoinAgent:
             return {'success': False, 'error': str(e)}
     
     def scan_and_report_violations(self, repo_id: int = None) -> Dict:
-        """Scan for violations and automatically file DMCA notices"""
+        """Scan for violations and automatically file blockchain DMCA notices"""
         try:
             # Get repositories to scan
             if repo_id:
@@ -796,20 +797,35 @@ class CompleteFilecoinAgent:
                 'timestamp': datetime.now().isoformat()
             }
             
+            # Ensure all required keys exist before passing to the generator
+            required_keys = ['github_url', 'id', 'registered_at', 'tx_hash', 'repo_hash', 'license_type']
+            for key in required_keys:
+                if key not in dmca_data['original_repo']:
+                    logger.warning(f"Original repo data missing key: '{key}'. Using 'N/A'.")
+                    dmca_data['original_repo'][key] = 'N/A'
+            
             # Generate DMCA PDF
             dmca_pdf_path = self.dmca_generator.generate_dmca_pdf(dmca_data)
             
             # Upload to IPFS
             dmca_metadata = {
                 'type': 'dmca_notice',
-                'original_repository': original_repo['github_url'],
-                'infringing_repository': infringing_repo['url'],
+                'original_repository': original_repo.get('github_url', 'N/A'),
+                'infringing_repository': infringing_repo.get('url', 'N/A'),
                 'similarity_score': comparison.get('similarity_score', 0)
             }
-            
             dmca_ipfs_hash = self.ipfs_manager.upload_to_ipfs(dmca_pdf_path, dmca_metadata)
             
-            # File DMCA on blockchain
+            # --- FIX APPLIED HERE ---
+            # First, ensure the infringing URL is registered in the LinkRegistry
+            logger.info(f"🔗 Registering infringing URL in LinkRegistry: {infringing_repo['url']}")
+            self.contract_interface.add_link_to_registry(
+                infringing_repo['url'],
+                dmca_ipfs_hash  # Link the URL to the DMCA notice itself
+            )
+            # --- END FIX ---
+            
+            # Now, file DMCA on blockchain (this should succeed now)
             dmca_tx_result = self.contract_interface.file_dmca_on_chain(
                 infringing_repo['url'], dmca_ipfs_hash
             )
@@ -821,7 +837,6 @@ class CompleteFilecoinAgent:
                 'similarity_score': comparison.get('similarity_score', 0),
                 'evidence_hash': dmca_ipfs_hash
             }
-            
             violation_tx_result = self.contract_interface.report_violation_on_chain(violation_data)
             
             dmca_id = f"dmca_{int(datetime.now().timestamp())}"
@@ -839,12 +854,28 @@ class CompleteFilecoinAgent:
             }
             
         except Exception as e:
+            logger.error(f"Error in _generate_and_file_dmca: {e}", exc_info=True)
             return {'success': False, 'error': str(e)}
     
     def _get_repository_by_id(self, repo_id: int) -> Optional[Dict]:
-        """Get repository by ID from blockchain"""
+        """Get repository by ID from cache or blockchain"""
+        # Check cache first for complete data, including tx_hash
+        if repo_id in self.repositories_cache:
+            logger.debug(f"Found repository {repo_id} in cache.")
+            return self.repositories_cache[repo_id]
+            
+        # If not in cache, fetch from chain
+        logger.debug(f"Repository {repo_id} not in cache, fetching from chain.")
         repo_result = self.contract_interface.get_repository_from_chain(repo_id)
-        return repo_result.get('repository') if repo_result['success'] else None
+        
+        # The data from chain might be incomplete (missing tx_hash), but it's the best we have.
+        # We can add it to the cache for future lookups.
+        if repo_result['success']:
+            repo_data = repo_result['repository']
+            self.repositories_cache[repo_id] = repo_data
+            return repo_data
+        
+        return None
     
     def _get_all_registered_repositories(self) -> List[Dict]:
         """Get all registered repositories from blockchain"""
