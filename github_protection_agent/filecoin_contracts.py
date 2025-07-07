@@ -90,7 +90,7 @@ class FilecoinContractInterface:
                 
                 # Sign and send
                 signed_txn = self.w3.eth.account.sign_transaction(transaction, self.private_key)
-                tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+                tx_hash = self.w3.eth.send_raw_transaction(signed_txn.raw_transaction)
                 
                 # Wait for confirmation
                 print(f"⏳ Waiting for transaction confirmation... (attempt {attempt + 1})")

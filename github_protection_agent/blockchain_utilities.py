@@ -166,7 +166,7 @@ class IPFSUtils:
         # Basic validation for IPFS CID
         if ipfs_hash.startswith('Qm') and len(ipfs_hash) == 46:
             return True
-        elif ipfs_hash.startswith('bafy') and len(ipfs_hash) >= 56:
+        if ipfs_hash.startswith('b') and len(ipfs_hash) >= 50:
             return True
         elif ipfs_hash.startswith('local://'):
             return True
